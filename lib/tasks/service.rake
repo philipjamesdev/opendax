@@ -33,19 +33,19 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc 'Run backend (vault db redis rabbitmq)'
+  desc 'Run backend (vault db pma redis rabbitmq)'
   task :backend, [:command] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
       puts '----- Starting dependencies -----'
-      sh 'docker-compose up -d vault db redis rabbitmq'
+      sh 'docker-compose up -d vault db pma redis rabbitmq'
       sleep 7 # time for db to start, we can get connection refused without sleeping
     end
 
     def stop
       puts '----- Stopping dependencies -----'
-      sh 'docker-compose rm -fs vault db redis rabbitmq'
+      sh 'docker-compose rm -fs vault db pma redis rabbitmq'
     end
 
 

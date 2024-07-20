@@ -19,6 +19,15 @@ services:
       POSTGRES_PASSWORD: <%= @config['database']['password'] %>
     <%- end %>
 
+  pma:
+    image: phpmyadmin
+    restart: always
+    container_name: pma
+    environment:
+      PMA_ARBITRARY: 1
+    ports:
+      - '8080:80'
+
   influxdb:
     image: influxdb:1.7.10
     restart: always
